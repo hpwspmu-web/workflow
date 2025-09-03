@@ -1,0 +1,318 @@
+{
+  "active": false,
+  "connections": {
+    "AI Analysis": {
+      "main": [
+        [
+          {
+            "node": "Append data to a sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "List a file": {
+      "main": [
+        [
+          {
+            "node": "Tack All Images ",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Analysis",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "List a file",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Tack All Images ": {
+      "main": [
+        [
+          {
+            "node": "AI Analysis",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Tack All Images ",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Append data to a sheet": {
+      "main": [
+        [
+          {
+            "node": "Send email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-08-27T02:30:44.651Z",
+  "id": "v24DHQmLQ3vTw3VR",
+  "isArchived": false,
+  "meta": null,
+  "name": "My workflow 3",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {}
+          ]
+        }
+      },
+      "id": "af866cec-28f0-4e85-acde-de65252dcfec",
+      "name": "Schedule Trigger",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "position": [
+        32,
+        112
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "messages": {
+          "messageValues": [
+            {
+              "message": "You are an AI construction progress analyst. Analyze the provided daily site photo and summarize the visible construction progress. Focus on structural elements (e.g., foundation, walls, roofing), machinery, materials, and any noticeable changes from previous days if available.  Return the update in 2-3 clear bullet points.  Then suggest the next expected step of construction based on standard workflow.  Format:  Progress Summary: • Point 1 • Point 2  Next Expected Step: <one-line suggestion>  Be concise, use simple language, and avoid speculation if details are unclear."
+            }
+          ]
+        },
+        "batching": {}
+      },
+      "id": "d9823904-dcc9-43a3-ac64-25bea8710e84",
+      "name": "AI Analysis",
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "position": [
+        688,
+        112
+      ],
+      "typeVersion": 1.7
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "sheetId": "=uyt543erty65432456yu",
+        "range": "Sheet1!A:B",
+        "options": {}
+      },
+      "id": "99905d99-df5f-4cec-98a1-400cd6275478",
+      "name": "Append data to a sheet",
+      "type": "n8n-nodes-base.googleSheets",
+      "position": [
+        1056,
+        112
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "53b5707e-13cc-480e-98cc-9761064a90e2",
+      "name": "Tack All Images ",
+      "type": "n8n-nodes-base.splitInBatches",
+      "position": [
+        464,
+        112
+      ],
+      "typeVersion": 3
+    },
+    {
+      "parameters": {
+        "authentication": "oAuth2",
+        "operation": "list",
+        "options": {}
+      },
+      "id": "d34e6a9e-9dba-4252-ac37-011b2de266e0",
+      "name": "List a file",
+      "type": "n8n-nodes-base.googleDrive",
+      "position": [
+        240,
+        112
+      ],
+      "typeVersion": 1,
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "lm5goBGAPBtFOWsW",
+          "name": "Google Drive PMU"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "modelName": "=models/gemini-1.0-pro",
+        "options": {}
+      },
+      "id": "b5f6dc61-ae72-4423-b9c4-24d68e22d9d7",
+      "name": "Google Gemini",
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "position": [
+        768,
+        320
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "fromEmail": "abc@gmail.com",
+        "toEmail": "contractor@gmail.com",
+        "subject": "Construction Site Progress Report",
+        "emailFormat": "text",
+        "text": "=Construction site progress report is ready",
+        "options": {}
+      },
+      "id": "81fb4a84-79cb-470c-8848-5df349931c19",
+      "name": "Send email",
+      "type": "n8n-nodes-base.emailSend",
+      "position": [
+        1280,
+        112
+      ],
+      "webhookId": "ae4b22c4-3d88-4bd3-86db-07dab410f21e",
+      "typeVersion": 2.1
+    },
+    {
+      "parameters": {
+        "content": "Runs the workflow daily to check for new site photos.\n\n",
+        "height": 260,
+        "width": 160,
+        "color": 6
+      },
+      "id": "0b279550-39e8-451d-bd55-3a0178519e30",
+      "name": "Sticky Note",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        0,
+        0
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "Logs the AI-generated summary into a Google Sheet for tracking.\n\n\n\n",
+        "height": 260,
+        "width": 200,
+        "color": 5
+      },
+      "id": "ef9134bc-29d4-4225-af0e-c74e58d4537c",
+      "name": "Sticky Note1",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        1008,
+        0
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "Loops through each image to send them individually for AI analysis.\n\n\n",
+        "height": 260,
+        "width": 160,
+        "color": 3
+      },
+      "id": "5ed38386-9596-4beb-b650-63d5b014ed2d",
+      "name": "Sticky Note2",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        432,
+        0
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "Fetches the latest uploaded site photos from the Drive folder.\n\n\n",
+        "height": 260,
+        "width": 160,
+        "color": 4
+      },
+      "id": "d494b55e-97f4-467c-ba6d-22403ba7c606",
+      "name": "Sticky Note3",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        224,
+        0
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "Passes each image to Gemini AI for construction progress detection.\n\n\n",
+        "height": 260,
+        "width": 280
+      },
+      "id": "79c654a7-da7f-4089-bd04-19524f45fe83",
+      "name": "Sticky Note4",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        672,
+        0
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "Sends the daily site progress update to stakeholders.\n\n\n",
+        "height": 260,
+        "width": 160,
+        "color": 2
+      },
+      "id": "edfa0c4a-7328-4b97-84c3-b81ac1065f42",
+      "name": "Sticky Note5",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        1248,
+        0
+      ],
+      "typeVersion": 1
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "shared": [
+    {
+      "createdAt": "2025-08-27T02:30:44.655Z",
+      "updatedAt": "2025-08-27T02:30:44.655Z",
+      "role": "workflow:owner",
+      "workflowId": "v24DHQmLQ3vTw3VR",
+      "projectId": "1qt5AgXQ1QuSOdsi"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-08-27T11:34:12.000Z",
+  "versionId": "f77f06ea-451d-4712-93eb-d7918c1f5dd5"
+}
