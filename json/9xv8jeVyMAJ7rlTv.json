@@ -1,0 +1,524 @@
+{
+  "active": false,
+  "connections": {
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Telegram",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Telegram Trigger": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Sheets": {
+      "main": [
+        [
+          {
+            "node": "Telegram1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Telegram",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Google Sheets",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "xAI Grok Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-08-21T07:57:36.438Z",
+  "id": "9xv8jeVyMAJ7rlTv",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Giải ngân dự án",
+  "nodes": [
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Phân tích đoạn đoạn văn bản sau, tách các thông tin liên quan đến số tiền, loại hợp đồng theo định dạng mẫu:\n\n{\n\"date\": \"ngày thanh toán\",\n\"total_amount\": \"tổng tiền thanh toán\",\n\"value_amount\": \"số tiền thanh toán chưa vat\",\n\"vat_amount\": \"số tiền vat thanh toán\",\n\"project_name\": \"tên dự án\",\n\"project_code\": \"mã dự án\",\n\"contractor_name\": \"tên nhà thầu\",\n\"package_number\": \"số gói thầu\",\n\"contract_number\": \"số hợp đồng\"\n\"contract_type\": \"loại hợp đồng\",\n\"total_invoice_amount\": \"tổng tiền trên hóa đơn\",\n\"value_invoice_amount\": \"số tiền chưa vat trên hóa đơn\",\n\"vat_invoice_amount\": \"số tiền vat trên hóa đơn\",\n\n\"comment\":\"Bình luận\"\n}\n\nTrong đó:\n- \"ngày thanh toán\" có định dạng dd/mm/yy\n- \"mã dự án\" có dạng DAxxxx, trong đó xxxx là 4 chữ số.\n- \"tổng tiền thanh toán\" là dạng số, không có kí tự chữ. Ví dụ 1000, 10000... Đây là toàn bộ số tiền trả cho nhà thầu.\n- \"tổng tiền trên hóa đơn\" là dạng số, không có kí tự chữ. Ví dụ 1000, 10000... Đây là toàn bộ số tiền trên hóa đơn.\n- \"số tiền vat trên hóa đơn\" là dạng số, không có kí tự chữ. Ví dụ 1000, 10000... Số này bằng số thuế GTGT của hóa đơn.\n- \"số tiền vat thanh toán\" là dạng số, không có kí tự chữ. Ví dụ 1000, 10000... Số này bằng \"số tiền vat trên hóa đơn\".\n- \"số tiền thanh toán chưa vat\" là dạng số, không có kí tự chữ. Ví dụ 1000, 10000... Số này bằng \"tổng tiền thanh toán\" trừ đi \"số tiền vat trên hóa đơn\".\n- \"số tiền chưa vat trên hóa đơn\" là dạng số, không có kí tự chữ. Ví dụ 1000, 10000... Số này bằng \"tổng tiền trên hóa đơn\" trừ đi \"số tiền vat trên hóa đơn\".\n- \"loại hợp đồng\" xác định như sau: điền giá trị “Xây lắp và thiết bị” nếu là hợp đồng xây lắp, điền giá trị “Chi phí tư vấn” nếu là hợp đồng tư vấn, nếu không có chỉ tiêu \"số gói thầu\" thì điền giá trị “Chi phí khác”.\n- \"Bình luận\" là nội dung bình luận tầm 3 câu về giao dịch thanh toán bằng Tiếng Việt.\n- Trong trường hợp một số chỉ tiêu không đầy đủ (chủ yếu là các chỉ tiêu thanh toán), bạn hãy tự suy luận về các chỉ tiêu còn thiếu.\n\nĐoạn văn bản: \n {{ $json.message.text }}",
+        "options": {
+          "systemMessage": "Bạn là một chuyên gia quản lý dự án tiếng Việt. Luôn trả về dạng JSON. Tuyệt đối trả về tiếng Việt. Only return Vietnamese."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.7,
+      "position": [
+        -1728,
+        96
+      ],
+      "id": "61c1d28c-7b52-449f-8b33-df7e0434607f",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Lấy input từ workflow\nconst input = $input.all();\n\n// Khởi tạo mảng để lưu kết quả\nconst results = [];\n\n// Duyệt qua từng item trong input\nfor (const item of input) {\n  // Parse chuỗi JSON trong trường output\n  const outputData = JSON.parse(item.json.output);\n  \n  // Tạo object chứa các thông tin cần thiết\n  const result = {\n    date: outputData.date,\n    total_amount: outputData.total_amount,\n    value_amount: outputData.value_amount,\n    vat_amount: outputData.vat_amount,\n    project_name: outputData.project_name,\n    project_code: outputData.project_code,\n    contractor_name: outputData.contractor_name,\n    package_number: outputData.package_number,\n    contract_number: outputData.contract_number,\n    contract_type: outputData.contract_type,\n    total_invoice_amount: outputData.total_invoice_amount,\n    value_invoice_amount: outputData.value_invoice_amount,\n    vat_invoice_amount: outputData.vat_invoice_amount,\n    comment: outputData.comment\n  };\n  \n  // Thêm vào mảng kết quả\n  results.push(result);\n}\n\n// Trả về kết quả\nreturn results;"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -1456,
+        96
+      ],
+      "id": "27efc794-f4d9-4451-b337-965511a222c8",
+      "name": "Code",
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1ggfqVozUYo0e14CqzSlWlIcVw9rRnV3tdMW0KE4vJU8",
+          "mode": "list",
+          "cachedResultName": "Giải ngân dự án",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1ggfqVozUYo0e14CqzSlWlIcVw9rRnV3tdMW0KE4vJU8/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Trang tính1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1bTxPbAagSVlLPE75quajp46FwhSjHCkAfBx7hw0aI8I/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Ngày": "={{ $json.date }}",
+            "Tổng tiền thanh toán": "={{ $json.total_amount }}",
+            "Số tiền thanh toán chưa VAT": "={{ $json.value_amount }}",
+            "VAT": "={{ $json.vat_amount }}",
+            "Tên dự án": "={{ $json.project_name }}",
+            "Mã dự án": "={{ $json.project_code }}",
+            "Tên nhà thầu": "={{ $json.contractor_name }}",
+            "Số gói thầu": "={{ $json.package_number }}",
+            "Số hợp đồng": "={{ $json.contract_number }}",
+            "Loại hợp đồng": "={{ $json.contract_type }}",
+            "Tổng tiền trên hóa đơn": "={{ $json.total_invoice_amount }}",
+            "Số tiền trên hóa đơn chưa VAT": "={{ $json.value_invoice_amount }}",
+            "Số tiền VAT trên hóa đơn": "={{ $json.vat_invoice_amount }}",
+            "Ghi chú": "={{ $json.comment }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Ngày",
+              "displayName": "Ngày",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Tổng tiền thanh toán",
+              "displayName": "Tổng tiền thanh toán",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Số tiền thanh toán chưa VAT",
+              "displayName": "Số tiền thanh toán chưa VAT",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "VAT",
+              "displayName": "VAT",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Tên dự án",
+              "displayName": "Tên dự án",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Mã dự án",
+              "displayName": "Mã dự án",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Tên nhà thầu",
+              "displayName": "Tên nhà thầu",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Số gói thầu",
+              "displayName": "Số gói thầu",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Số hợp đồng",
+              "displayName": "Số hợp đồng",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Loại hợp đồng",
+              "displayName": "Loại hợp đồng",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Tổng tiền trên hóa đơn",
+              "displayName": "Tổng tiền trên hóa đơn",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Số tiền trên hóa đơn chưa VAT",
+              "displayName": "Số tiền trên hóa đơn chưa VAT",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Số tiền VAT trên hóa đơn",
+              "displayName": "Số tiền VAT trên hóa đơn",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Ghi chú",
+              "displayName": "Ghi chú",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        -1104,
+        32
+      ],
+      "id": "773a6e1e-bd93-4356-8d24-bd0cabf5c0db",
+      "name": "Google Sheets",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "bDxwsbgFGCEJL8T6",
+          "name": "Google Sheets PMU"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "updates": [
+          "message"
+        ],
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegramTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -1872,
+        96
+      ],
+      "id": "7dcefa05-dff6-4bdd-a8f9-9605f8cbf8d2",
+      "name": "Telegram Trigger",
+      "webhookId": "04d238bc-b52a-43b9-8934-6330dc37e541",
+      "credentials": {
+        "telegramApi": {
+          "id": "3B293brHd7IH9AVq",
+          "name": "Telegram Hoàng"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Telegram Trigger').item.json.message.chat.id }}",
+        "text": "=Chúng tôi đã cập nhật vào bảng thanh toán của dự án. Xin cảm ơn!\n\nTôi xác nhận và có ý kiến về khoản thanh toán như sau: {{ $json[\"Ghi chú\"] }}",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        -960,
+        64
+      ],
+      "id": "9c262760-a900-48a8-a971-8fe862f7963d",
+      "name": "Telegram1",
+      "webhookId": "6b6fc72b-fa60-4695-9f4b-10b4905bbf30",
+      "credentials": {
+        "telegramApi": {
+          "id": "3B293brHd7IH9AVq",
+          "name": "Telegram Hoàng"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "7d08a750-946d-4076-b7cd-7851afa49253",
+              "leftValue": "={{$json.project_name}}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "empty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -1296,
+        32
+      ],
+      "id": "866e702c-0eec-487c-9da6-0a93e660bcb1",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "model": "grok-4-0709",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatXAiGrok",
+      "typeVersion": 1,
+      "position": [
+        -1696,
+        272
+      ],
+      "id": "3aab5e09-2348-4c90-bd35-3e70bf97a820",
+      "name": "xAI Grok Chat Model",
+      "credentials": {
+        "xAiApi": {
+          "id": "nuArFrJIV927cng1",
+          "name": "xAi PMU"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## NHẬP DỮ LIỆU ĐẦU VÀO \nChat ở dạng tin nhắn",
+        "height": 272,
+        "width": 304
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -2064,
+        -16
+      ],
+      "id": "afb7c253-2f96-4222-b201-fc22ae6315f7",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "content": "## LỌC DỮ LIỆU\n",
+        "height": 416,
+        "width": 416,
+        "color": 3
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -1744,
+        -16
+      ],
+      "id": "3162fe49-f1ea-4d43-ba55-668cae551507",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "content": "## GHI NHỚ VÀ TỔNG HỢP\n",
+        "height": 176,
+        "width": 320,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -1312,
+        -16
+      ],
+      "id": "41046de8-7908-4263-bbe7-79db026b3ebd",
+      "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Telegram Trigger').item.json.message.chat.id }}",
+        "text": "=Xin lỗi. Hiện tôi chưa hiểu được nội dung chat của bạn. Bạn có thể nói lại rõ hơn được không. Xin cảm ơn!",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        -960,
+        224
+      ],
+      "id": "04d049bd-3755-4230-a05b-dd14c78997c9",
+      "name": "Telegram",
+      "webhookId": "bd077c24-a648-4a26-8a2d-688587150cd2",
+      "credentials": {
+        "telegramApi": {
+          "id": "3B293brHd7IH9AVq",
+          "name": "Telegram Hoàng"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## TRẢ KẾT QUẢ\nBot tự trả về tin nhắn thông báo\n",
+        "height": 416,
+        "width": 320
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -976,
+        -16
+      ],
+      "id": "2c8baca7-36ce-4035-afe6-307e97bfbd5b",
+      "name": "Sticky Note3"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "shared": [
+    {
+      "createdAt": "2025-08-21T07:57:36.442Z",
+      "updatedAt": "2025-08-21T07:57:36.442Z",
+      "role": "workflow:owner",
+      "workflowId": "9xv8jeVyMAJ7rlTv",
+      "projectId": "1qt5AgXQ1QuSOdsi"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-08-27T02:10:12.000Z",
+  "versionId": "8105551e-893f-4035-b9b3-dfdda1e55f29"
+}
