@@ -1,0 +1,126 @@
+{
+  "active": false,
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "xAI Grok Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "MCP Client": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-08-28T04:19:17.193Z",
+  "id": "pMZXkKO1yYqWkVuc",
+  "isArchived": true,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "My workflow 4",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.3,
+      "position": [
+        -320,
+        -16
+      ],
+      "id": "5590c1ec-1f81-4661-8d3a-edaa85ecb149",
+      "name": "When chat message received",
+      "webhookId": "4b30f9b7-e0ec-4494-9ade-07400cf66158"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "Trước khi trả lời querry, hãy truy xuất memories bằng cách sử dụng MCP Mem) để lấy thêm nội dung và trả lời nhanh hơn bằng search_memories.\n\nNếu không thì trả lời như bình thường. Hãy luôn lưu lại cuộc hội thoại bằng save_memory.",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        -112,
+        -16
+      ],
+      "id": "36eb6d4f-9a6d-4b68-9a99-58f04e375ae9",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatXAiGrok",
+      "typeVersion": 1,
+      "position": [
+        -256,
+        192
+      ],
+      "id": "a8f5d9f3-542d-4785-ae9e-acafd02ff5fe",
+      "name": "xAI Grok Chat Model",
+      "credentials": {
+        "xAiApi": {
+          "id": "nuArFrJIV927cng1",
+          "name": "xAi PMU"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "endpointUrl": "http://0.0.0.0:8050"
+      },
+      "type": "@n8n/n8n-nodes-langchain.mcpClientTool",
+      "typeVersion": 1.1,
+      "position": [
+        112,
+        192
+      ],
+      "id": "bff1af1c-25b3-4d14-ab00-d5b0288083f4",
+      "name": "MCP Client"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "shared": [
+    {
+      "createdAt": "2025-08-28T04:19:17.205Z",
+      "updatedAt": "2025-08-28T04:19:17.205Z",
+      "role": "workflow:owner",
+      "workflowId": "pMZXkKO1yYqWkVuc",
+      "projectId": "1qt5AgXQ1QuSOdsi"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-09-03T07:06:14.000Z",
+  "versionId": "9ab228da-05b6-417a-84a8-39f6010a0f42"
+}
