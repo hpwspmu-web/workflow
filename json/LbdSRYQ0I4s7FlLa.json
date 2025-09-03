@@ -1,0 +1,495 @@
+{
+  "active": false,
+  "connections": {
+    "Drive: Download File": {
+      "main": [
+        [
+          {
+            "node": "Analyze image",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Sheets: Append": {
+      "main": [
+        [
+          {
+            "node": "Aggregate",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Drive: Move to 'report processed'": {
+      "main": [
+        [
+          {
+            "node": "Loop Back (Pass-through)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Back (Pass-through)": {
+      "main": [
+        [
+          {
+            "node": "Split In Batches1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split In Batches1": {
+      "main": [
+        [
+          {
+            "node": "Drive: Download File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Analyze image": {
+      "main": [
+        [
+          {
+            "node": "Code1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code1": {
+      "main": [
+        [
+          {
+            "node": "Google Sheets: Append",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Aggregate": {
+      "main": [
+        [
+          {
+            "node": "Drive: Move to 'report processed'",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Drive Trigger": {
+      "main": [
+        [
+          {
+            "node": "search các file",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "search các file": {
+      "main": [
+        [
+          {
+            "node": "Split In Batches1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-08-25T00:48:50.133Z",
+  "id": "LbdSRYQ0I4s7FlLa",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "OCR hàng loạt",
+  "nodes": [
+    {
+      "parameters": {
+        "operation": "download",
+        "fileId": {
+          "__rl": true,
+          "mode": "id",
+          "value": "={{ $json.id }}"
+        },
+        "options": {}
+      },
+      "id": "f4c9cd53-f4f1-4287-870b-65e25e37a92b",
+      "name": "Drive: Download File",
+      "type": "n8n-nodes-base.googleDrive",
+      "position": [
+        -688,
+        256
+      ],
+      "typeVersion": 3
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "16Fx5DqALw4jvDh0-X0iV4KgTjnS3w9UI4Iy8rplZ_u8",
+          "mode": "list",
+          "cachedResultName": "kết quả giám sát B",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/16Fx5DqALw4jvDh0-X0iV4KgTjnS3w9UI4Iy8rplZ_u8/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/16Fx5DqALw4jvDh0-X0iV4KgTjnS3w9UI4Iy8rplZ_u8/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "tên file": "={{ $('Split In Batches1').item.json.name }}",
+            "tên mẫu": "={{ $json.tenMau }}",
+            "địa chỉ lấy mẫu": "={{ $json.diaChiLayMau }}",
+            "ngày nhận mẫu": "={{ $json.ngayNhanMau }}",
+            "tên thông số ": "={{ $json.tenThongSo }}",
+            "kết quả ": "={{ $json.ketQua }}",
+            "đơn vị ": "={{ $json.donVi }}",
+            "ngưỡng đo": "={{ $json.nguongGioiHan }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "tên file",
+              "displayName": "tên file",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "tên mẫu",
+              "displayName": "tên mẫu",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "địa chỉ lấy mẫu",
+              "displayName": "địa chỉ lấy mẫu",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "ngày nhận mẫu",
+              "displayName": "ngày nhận mẫu",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "tên thông số ",
+              "displayName": "tên thông số ",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "kết quả ",
+              "displayName": "kết quả ",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "đơn vị ",
+              "displayName": "đơn vị ",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "ngưỡng đo",
+              "displayName": "ngưỡng đo",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "id": "fca6aac1-e87c-4eda-b765-bccb3c488247",
+      "name": "Google Sheets: Append",
+      "type": "n8n-nodes-base.googleSheets",
+      "position": [
+        -16,
+        256
+      ],
+      "typeVersion": 4
+    },
+    {
+      "parameters": {
+        "operation": "move",
+        "fileId": {
+          "__rl": true,
+          "mode": "id",
+          "value": "={{ $('Split In Batches1').item.json.id }}"
+        },
+        "driveId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "My Drive"
+        },
+        "folderId": {
+          "__rl": true,
+          "value": "=1gmcxBgw2FNDhcVKxgZuMp-VOx3EnrgvM",
+          "mode": "id"
+        }
+      },
+      "id": "e0c56500-bea5-48c2-a0f3-d651c375453e",
+      "name": "Drive: Move to 'report processed'",
+      "type": "n8n-nodes-base.googleDrive",
+      "position": [
+        432,
+        256
+      ],
+      "typeVersion": 3,
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "jsCode": "return $items();"
+      },
+      "id": "421c4f41-871b-47e2-8801-fb8db2d91f63",
+      "name": "Loop Back (Pass-through)",
+      "type": "n8n-nodes-base.code",
+      "position": [
+        656,
+        320
+      ],
+      "typeVersion": 2
+    },
+    {
+      "parameters": {
+        "batchSize": 1,
+        "options": {
+          "reset": false
+        }
+      },
+      "id": "6ada5de2-a7d8-403b-8c42-7ff4a2e4f0ac",
+      "name": "Split In Batches1",
+      "type": "n8n-nodes-base.splitInBatches",
+      "position": [
+        -912,
+        320
+      ],
+      "typeVersion": 2
+    },
+    {
+      "parameters": {
+        "resource": "image",
+        "operation": "analyze",
+        "modelId": {
+          "__rl": true,
+          "value": "models/gemini-2.0-flash-thinking-exp",
+          "mode": "list",
+          "cachedResultName": "models/gemini-2.0-flash-thinking-exp"
+        },
+        "text": "Bạn là công cụ đọc ảnh để trích xuất dữ liệu từ báo cáo kết quả thử nghiệm mẫu nước.  \nHãy phân tích ảnh và trả về dữ liệu ở dạng JSON với các trường sau:  \n- \"Tên mẫu\": [Tên mẫu trong báo cáo] \n- \"Địa chỉ lấy mẫu\": [Địa điểm lấy mẫu trong báo cáo]  \n- \"Ngày nhận mẫu\" [ngày nhận mẫu]\n- \"Thông số\": danh sách các đối tượng, mỗi đối tượng gồm:  \n   + \"Tên thông số\": [Tên thông số đo được]  \n   + \"Kết quả\": [Giá trị kết quả đo]  \n   + \"Đơn vị\": [Đơn vị đo]  \n   + \"Ngưỡng giới hạn\": [Giới hạn cho phép]  \n\nYêu cầu:  \n- Chỉ trả về JSON thuần, không giải thích.  \n- Nếu thông tin không có trong ảnh, để giá trị rỗng \"\".  \n- Không bỏ sót bất kỳ thông số nào trong bảng kết quả.  ",
+        "inputType": "binary",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.googleGemini",
+      "typeVersion": 1,
+      "position": [
+        -464,
+        256
+      ],
+      "id": "c176e67b-120c-4f03-b115-4f82c6b33309",
+      "name": "Analyze image"
+    },
+    {
+      "parameters": {
+        "jsCode": "return $input.all().flatMap(item => {\n    try {\n        // Lấy dữ liệu text từ Gemini\n        const text = item.json.content.parts[0].text;\n\n        // Loại bỏ dấu ```json và ``` nếu có\n        const cleanText = text.replace(/```json/g, '').replace(/```/g, '').trim();\n\n        // Parse thành object\n        const data = JSON.parse(cleanText);\n\n        // Lấy thông tin chung\n        const tenMau = data[\"Tên mẫu\"] || \"\";\n        const diaChiLayMau = data[\"Địa chỉ lấy mẫu\"] || \"\";\n        const ngayNhanMau = data[\"Ngày nhận mẫu\"] || \"\";\n\n        // Tách mỗi thông số thành 1 item riêng\n        return (data[\"Thông số\"] || []).map(ts => ({\n            json: {\n                tenMau,\n                diaChiLayMau,\n                ngayNhanMau,\n                tenThongSo: ts[\"Tên thông số\"] || \"\",\n                ketQua: ts[\"Kết quả\"] || \"\",\n                donVi: ts[\"Đơn vị\"] || \"\",\n                nguongGioiHan: ts[\"Ngưỡng giới hạn\"] || \"\"\n            }\n        }));\n\n    } catch (e) {\n        // Nếu lỗi thì trả về thông báo lỗi\n        return [{\n            json: {\n                error: e.message,\n                raw: item.json\n            }\n        }];\n    }\n});\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -240,
+        256
+      ],
+      "id": "0a0e3e9c-3a3f-4036-a3d4-a897ab2ed730",
+      "name": "Code1"
+    },
+    {
+      "parameters": {
+        "aggregate": "aggregateAllItemData",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        208,
+        256
+      ],
+      "id": "3d819caf-3312-48c0-a9eb-c68514aa8f10",
+      "name": "Aggregate"
+    },
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "triggerOn": "specificFolder",
+        "folderToWatch": {
+          "__rl": true,
+          "value": "1xNiEdf9nDdWHowWw5a4xBZ_K2GGeFXmm",
+          "mode": "list",
+          "cachedResultName": "report new",
+          "cachedResultUrl": "https://drive.google.com/drive/folders/1xNiEdf9nDdWHowWw5a4xBZ_K2GGeFXmm"
+        },
+        "event": "fileCreated",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDriveTrigger",
+      "typeVersion": 1,
+      "position": [
+        -1360,
+        320
+      ],
+      "id": "afbb56d8-fa70-4dde-8755-7db5ed6786e8",
+      "name": "Google Drive Trigger"
+    },
+    {
+      "parameters": {
+        "resource": "fileFolder",
+        "returnAll": true,
+        "filter": {
+          "folderId": {
+            "__rl": true,
+            "value": "=1xNiEdf9nDdWHowWw5a4xBZ_K2GGeFXmm",
+            "mode": "id"
+          }
+        },
+        "options": {
+          "fields": [
+            "id",
+            "name",
+            "mimeType",
+            "createdTime",
+            "modifiedTime",
+            "parents"
+          ]
+        }
+      },
+      "id": "9ce4b770-aaaf-4a00-8f59-ea179a58457a",
+      "name": "search các file",
+      "type": "n8n-nodes-base.googleDrive",
+      "position": [
+        -1136,
+        320
+      ],
+      "typeVersion": 3,
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "content": "**check folder chứa file cần xử lý**\nsearch các file trong folder\ntách các file theo từng ID",
+        "height": 432,
+        "width": 768
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -1584,
+        48
+      ],
+      "id": "10e6f167-e2cf-477e-bc6b-d344a2b37c07",
+      "name": "Sticky Note4"
+    },
+    {
+      "parameters": {
+        "content": "## phân tích lấy thông tin \n**điền vào sheet tương ứng**\n",
+        "height": 432,
+        "width": 832,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -736,
+        -32
+      ],
+      "id": "5b1249c9-8ddd-4d1d-854a-b54725c2e905",
+      "name": "Sticky Note5"
+    },
+    {
+      "parameters": {
+        "content": "## chuyển file đã xử lý sang folder khác và lặp lại qui trình",
+        "height": 432,
+        "width": 784,
+        "color": 6
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        144,
+        48
+      ],
+      "id": "fbc4610d-f83b-4bf9-8fde-5e87a34c023e",
+      "name": "Sticky Note6"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "shared": [
+    {
+      "createdAt": "2025-08-25T00:48:50.139Z",
+      "updatedAt": "2025-08-25T00:48:50.139Z",
+      "role": "workflow:owner",
+      "workflowId": "LbdSRYQ0I4s7FlLa",
+      "projectId": "1qt5AgXQ1QuSOdsi"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-08-26T09:02:51.000Z",
+  "versionId": "34f68cb3-42d2-42b6-b07c-27b9d9eeb12c"
+}
