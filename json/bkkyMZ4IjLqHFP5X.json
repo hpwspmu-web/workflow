@@ -1,0 +1,173 @@
+{
+  "active": false,
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "xAI Grok Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-08-27T08:51:56.887Z",
+  "id": "bkkyMZ4IjLqHFP5X",
+  "isArchived": true,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Lịch tự động - zalo",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "58b89388-adc2-46db-889b-7e59c4ae3b63",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -1120,
+        288
+      ],
+      "id": "f1d5d26b-8b8d-4650-912b-29966fcb7e5d",
+      "name": "Webhook",
+      "webhookId": "58b89388-adc2-46db-889b-7e59c4ae3b63"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://bot-api.zapps.me/bot4007478907826002270:MEZflzrzexChwVYxzermsoAMSXaPzYIlLHCYqbQJgpEEreHHHdstPpGAUWUkZMvz/setWebhook",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "url",
+              "value": "https://bql-hoang.taild4910e.ts.net/webhook/58b89388-adc2-46db-889b-7e59c4ae3b63"
+            },
+            {
+              "name": "secret_token",
+              "value": "abc123456"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -1296,
+        160
+      ],
+      "id": "306b58b9-bb58-4eec-911e-b5951e40b48f",
+      "name": "HTTP Request"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.body.message.text }}",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        -944,
+        224
+      ],
+      "id": "184d728c-d6cf-4d4a-86d9-c6b6496df969",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "model": "grok-4-0709",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatXAiGrok",
+      "typeVersion": 1,
+      "position": [
+        -960,
+        384
+      ],
+      "id": "4086c49e-2d1a-4699-a5c8-333d06a63702",
+      "name": "xAI Grok Chat Model",
+      "credentials": {
+        "xAiApi": {
+          "id": "nuArFrJIV927cng1",
+          "name": "xAi PMU"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://bot-api.zapps.me/bot4007478907826002270:MEZflzrzexChwVYxzermsoAMSXaPzYIlLHCYqbQJgpEEreHHHdstPpGAUWUkZMvz/sendMessage",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "=chat_id",
+              "value": "={{ $('Webhook').item.json.body.message.chat.id }}"
+            },
+            {
+              "name": "text",
+              "value": "={{ $json.output }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -672,
+        224
+      ],
+      "id": "5be35a7b-0500-4d78-9352-c45a375728ac",
+      "name": "HTTP Request1"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1",
+    "callerPolicy": "workflowsFromSameOwner"
+  },
+  "shared": [
+    {
+      "createdAt": "2025-08-27T08:51:56.901Z",
+      "updatedAt": "2025-08-27T08:51:56.901Z",
+      "role": "workflow:owner",
+      "workflowId": "bkkyMZ4IjLqHFP5X",
+      "projectId": "1qt5AgXQ1QuSOdsi"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 1,
+  "updatedAt": "2025-08-28T07:11:08.000Z",
+  "versionId": "11ebf6a9-e2de-451c-a950-a081de6f5469"
+}
