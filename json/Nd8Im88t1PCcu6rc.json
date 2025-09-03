@@ -1,0 +1,976 @@
+{
+  "active": false,
+  "connections": {
+    "Ghi vào sheet": {
+      "main": [
+        [
+          {
+            "node": "Kiểm tra ngày tháng",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Lấy file": {
+      "main": [
+        [
+          {
+            "node": "Đọc thông tin từ văn bản",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Phân tích tin nhắn trực tiếp",
+            "type": "ai_languageModel",
+            "index": 0
+          },
+          {
+            "node": "Tạo sự kiện",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Tạo sự kiện": {
+      "main": [
+        [
+          {
+            "node": "Xử lý 2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Tạo mới sự kiện": {
+      "ai_tool": [
+        [
+          {
+            "node": "Tạo sự kiện",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Kiểm tra ngày tháng": {
+      "main": [
+        [
+          {
+            "node": "Tạo sự kiện",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Đánh dấu",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Xử lý 2": {
+      "main": [
+        [
+          {
+            "node": "Cập nhật trạng thái",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Cập nhật trạng thái": {
+      "main": [
+        [
+          {
+            "node": "Hệ thống xác nhận",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "Lấy file",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Phân tích tin nhắn trực tiếp",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Đọc thông tin từ văn bản": {
+      "main": [
+        [
+          {
+            "node": "Lịch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Phân tích tin nhắn trực tiếp": {
+      "main": [
+        [
+          {
+            "node": "Lịch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Tin nhắn có kèm file hoặc không": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Lịch": {
+      "main": [
+        [
+          {
+            "node": "Ghi vào sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-08-26T10:53:30.846Z",
+  "id": "Nd8Im88t1PCcu6rc",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Lịch tuần 1",
+  "nodes": [
+    {
+      "parameters": {
+        "content": "## LẤY THÔNG TIN TỪ FILE\nCập nhật hàng tuần hoặc khi có lịch thay đổi",
+        "height": 480,
+        "width": 208
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -1088,
+        160
+      ],
+      "id": "c38b7a8d-f0f9-4512-88e2-7a0b050871ba",
+      "name": "Sticky Note4"
+    },
+    {
+      "parameters": {
+        "content": "## PHÂN TÍCH THÔNG TIN\nLọc các thông tin theo trường có liên quan, chỉ giữ lại các sự kiện có liên quan đến đơn vị\n",
+        "height": 480,
+        "width": 464,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -864,
+        160
+      ],
+      "id": "be3d2d57-c348-418e-a397-b4b9b6ec57c1",
+      "name": "Sticky Note5"
+    },
+    {
+      "parameters": {
+        "content": "## GHI VÀO SHEET\nLoại bỏ những mốc thời gian đã diễn ra, chỉ tạo và sửa lại các sự kiện chưa diễn ra ",
+        "height": 480,
+        "width": 384,
+        "color": 6
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -384,
+        160
+      ],
+      "id": "8c7aafb9-1a27-4488-87aa-f6d4ad1e02cd",
+      "name": "Sticky Note6"
+    },
+    {
+      "parameters": {
+        "content": "## THÔNG BÁO KẾT QUẢ\n",
+        "height": 480,
+        "width": 224
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        672,
+        160
+      ],
+      "id": "7f9c73a8-4eca-4b5b-b4fc-0d5edb286efe",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "content": "## TẠO SỰ KIỆN MỚI\n",
+        "height": 480,
+        "width": 336,
+        "color": 3
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        16,
+        160
+      ],
+      "id": "ab920ba3-29ee-42bc-a9b3-567eab5f03d5",
+      "name": "Sticky Note7"
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "1n6zUdxzw-LVbz2j3KIRNksTYvHc-4cFldw6XPBsisKs",
+          "mode": "list",
+          "cachedResultName": "Lên lịch",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1n6zUdxzw-LVbz2j3KIRNksTYvHc-4cFldw6XPBsisKs/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/16Fx5DqALw4jvDh0-X0iV4KgTjnS3w9UI4Iy8rplZ_u8/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Địa điểm": "={{ $json.location }}",
+            "Nội dung": "={{ $json.event }}",
+            "ID": "={{ $json.id }}",
+            "Thành phần": "={{ $json.participants }}",
+            "Thời gian": "={{ $json.time }}",
+            "Trạng thái": "Chưa tạo lịch",
+            "Loại": "={{ $json.type }}"
+          },
+          "matchingColumns": [
+            "ID"
+          ],
+          "schema": [
+            {
+              "id": "ID",
+              "displayName": "ID",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Thời gian",
+              "displayName": "Thời gian",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Địa điểm",
+              "displayName": "Địa điểm",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Nội dung",
+              "displayName": "Nội dung",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Thành phần",
+              "displayName": "Thành phần",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Loại",
+              "displayName": "Loại",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Trạng thái",
+              "displayName": "Trạng thái",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "id": "6175cd19-414b-4119-abeb-4ad6c93b1fbf",
+      "name": "Ghi vào sheet",
+      "type": "n8n-nodes-base.googleSheets",
+      "position": [
+        -336,
+        272
+      ],
+      "typeVersion": 4,
+      "executeOnce": false,
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "bDxwsbgFGCEJL8T6",
+          "name": "Google Sheets PMU"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "file",
+        "fileId": "={{ $json.message.document.file_id }}",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        -832,
+        288
+      ],
+      "id": "aa348238-4312-4c72-aaba-41bb09689bad",
+      "name": "Lấy file",
+      "webhookId": "665cc64f-2b7f-4271-a0d2-31bcf0864b9d",
+      "credentials": {
+        "telegramApi": {
+          "id": "3B293brHd7IH9AVq",
+          "name": "Telegram Hoàng"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": "grok-3-fast",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatXAiGrok",
+      "typeVersion": 1,
+      "position": [
+        -352,
+        528
+      ],
+      "id": "bfa48522-b0f4-440e-a0f1-5296d9bbac23",
+      "name": "AI",
+      "credentials": {
+        "xAiApi": {
+          "id": "nuArFrJIV927cng1",
+          "name": "xAi PMU"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## CẬP NHẬT\nCập nhật lại trạng thái sự kiện đã được tạo lịch",
+        "height": 480,
+        "width": 288,
+        "color": 6
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        368,
+        160
+      ],
+      "id": "074929c8-cccb-409c-8032-4a1253cfe208",
+      "name": "Sticky Note8"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Bạn được cung cấp dữ liệu từ google sheet. Kiểm tra các dòng từ file trước đó, với mỗi dòng trong sheet có {{ $json.ID }} khác nhau thì kích hoạt tạo event. \n\nEvent được tạo ra phải có các thông tin:\n- Start: là {{ $json[\"Thời gian\"] }} với định đạng \"yyyy-mm-ddThh:mm:ss+07:00\", trong đó: yyyy-mm-dd là năm-tháng-ngày, hh:mm:ss là giờ:phút:giây\n- End: mặc định là 1 tiếng sau Start date\n- Summary: {{ $json[\"Địa điểm\"] }} - {{ $json[\"Nội dung\"] }}\n- Description: là {{ $json[\"Thành phần\"] }}\n\nLưu ý: \n- Với mỗi sự kiện khác nhau thì tạo một event riêng rẽ. Định dạng giờ phải tương thích với Google Calendar.\n- Summary phải giữ lại text gốc, có đầy đủ dấu.\n- Không hỏi lại.\n- Output trả về ở dạng Json, gồm có các thông tin:\n+ ID: {{ $json.ID }}\n+ Thời gian: {{ $json[\"Thời gian\"] }}\n+ Trạng thái: tạo thành công thì ghi là \"Đã tạo lịch\", không thành công thì ghi là \"Chưa tạo lịch\"",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        80,
+        256
+      ],
+      "id": "5382b45f-1fec-49cf-8dbe-3d3e8e802c97",
+      "name": "Tạo sự kiện"
+    },
+    {
+      "parameters": {
+        "calendar": {
+          "__rl": true,
+          "value": "hpwspmu@gmail.com",
+          "mode": "list",
+          "cachedResultName": "hpwspmu@gmail.com"
+        },
+        "start": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Start', ``, 'string') }}",
+        "end": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('End', ``, 'string') }}",
+        "useDefaultReminders": false,
+        "additionalFields": {
+          "attendees": [
+            "minhngochpws@gmail.com",
+            "phamquanghuy0408@gmail.com"
+          ],
+          "description": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Description', ``, 'string') }}",
+          "summary": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Summary', ``, 'string') }}"
+        },
+        "remindersUi": {
+          "remindersValues": [
+            {
+              "method": "popup",
+              "minutes": 30
+            },
+            {
+              "method": "email",
+              "minutes": "=1440"
+            },
+            {
+              "method": "email",
+              "minutes": "=10080"
+            },
+            {
+              "method": "email",
+              "minutes": "=43200"
+            },
+            {
+              "method": "email",
+              "minutes": 40320
+            },
+            {
+              "method": "email",
+              "minutes": 11520
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.googleCalendarTool",
+      "typeVersion": 1.3,
+      "position": [
+        240,
+        496
+      ],
+      "id": "c1ee8e47-eab6-47f3-b121-a497f9eb4bd6",
+      "name": "Tạo mới sự kiện",
+      "credentials": {
+        "googleCalendarOAuth2Api": {
+          "id": "Vdl3bkwXGwc8WK5q",
+          "name": "Google Calendar PMU"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "1n6zUdxzw-LVbz2j3KIRNksTYvHc-4cFldw6XPBsisKs",
+          "mode": "list",
+          "cachedResultName": "Lên lịch",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1n6zUdxzw-LVbz2j3KIRNksTYvHc-4cFldw6XPBsisKs/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Trang tính1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1QwmB-AhLuTlJDwzx4vavklrVKhqehePsP34kKpZ7xxE/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "ID": "={{ $json.ID }}",
+            "Trạng thái": "Không tạo lịch nữa"
+          },
+          "matchingColumns": [
+            "ID"
+          ],
+          "schema": [
+            {
+              "id": "ID",
+              "displayName": "ID",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Thời gian",
+              "displayName": "Thời gian",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Địa điểm",
+              "displayName": "Địa điểm",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Nội dung",
+              "displayName": "Nội dung",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Thành phần",
+              "displayName": "Thành phần",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Trạng thái",
+              "displayName": "Trạng thái",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -192,
+        496
+      ],
+      "id": "d97764ec-1e92-4d69-b476-7784e4c1be18",
+      "name": "Đánh dấu",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "bDxwsbgFGCEJL8T6",
+          "name": "Google Sheets PMU"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "8ee559ea-7da6-41b9-b293-89561187a5a4",
+              "leftValue": "={{ $json[\"Thời gian\"] }}",
+              "rightValue": "={{ $now }}",
+              "operator": {
+                "type": "dateTime",
+                "operation": "after"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "looseTypeValidation": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -192,
+        272
+      ],
+      "id": "88fceb57-9c2d-4420-b863-dc1bada3c002",
+      "name": "Kiểm tra ngày tháng"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Kiểm tra dữ liệu đầu vào\nconst items = $input.all();\nif (!items || !items.length) {\n  throw new Error(\"No input data provided\");\n}\n\n// Lấy thời gian hiện tại (múi giờ +07)\nconst currentDate = new Date().toLocaleString(\"en-US\", { timeZone: \"Asia/Ho_Chi_Minh\" });\n\n// Xử lý từng item\nconst result = items.map(item => {\n  let output = item.json.output || \"\";\n\n  // Làm sạch chuỗi JSON trong \"output\"\n  try {\n    // Loại bỏ \\n và các ký tự thừa\n    output = output.replace(/\\\\n/g, \"\").replace(/\\\\\"/g, '\"').trim();\n  } catch (error) {\n    throw new Error(`Error cleaning output string: ${error.message}. Raw output: ${output}`);\n  }\n\n  // Phân tích JSON\n  let parsedOutput;\n  try {\n    parsedOutput = JSON.parse(output);\n  } catch (error) {\n    throw new Error(`Error parsing output JSON: ${error.message}. Cleaned output: ${output}`);\n  }\n\n  // Tách các trường \"ID\" và \"Trạng thái\"\n  const id = parsedOutput.ID || \"\";\n  const trang_thai = parsedOutput[\"Trạng thái\"] || \"\";\n\n  // Tạo đối tượng mới\n  return {\n    id,\n    trang_thai,\n    date_processed: currentDate\n  };\n});\n\n// Trả về kết quả theo định dạng n8n\nreturn result.map(item => ({ json: item }));"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        400,
+        256
+      ],
+      "id": "ea552cfc-b6ef-4268-afa9-891581aa83eb",
+      "name": "Xử lý 2"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "1n6zUdxzw-LVbz2j3KIRNksTYvHc-4cFldw6XPBsisKs",
+          "mode": "list",
+          "cachedResultName": "Lên lịch",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1n6zUdxzw-LVbz2j3KIRNksTYvHc-4cFldw6XPBsisKs/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Trang tính1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1QwmB-AhLuTlJDwzx4vavklrVKhqehePsP34kKpZ7xxE/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Trạng thái": "={{ $json.trang_thai }}",
+            "ID": "={{ $json.id }}"
+          },
+          "matchingColumns": [
+            "ID"
+          ],
+          "schema": [
+            {
+              "id": "ID",
+              "displayName": "ID",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Thời gian",
+              "displayName": "Thời gian",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Địa điểm",
+              "displayName": "Địa điểm",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Nội dung",
+              "displayName": "Nội dung",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Thành phần",
+              "displayName": "Thành phần",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Trạng thái",
+              "displayName": "Trạng thái",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        528,
+        256
+      ],
+      "id": "f124ffee-5410-4b4d-8887-16da7142998a",
+      "name": "Cập nhật trạng thái",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "bDxwsbgFGCEJL8T6",
+          "name": "Google Sheets PMU"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "7039157861",
+        "text": "=Tôi đã cập nhật lịch mới vào Calendar của bạn. Hãy kiểm tra để biết chi tiết!",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        704,
+        256
+      ],
+      "id": "c27f5995-0584-43d1-a829-a48f3e7f1c06",
+      "name": "Hệ thống xác nhận",
+      "webhookId": "7c8c0732-368f-4f9d-a178-db0be37c6104",
+      "credentials": {
+        "telegramApi": {
+          "id": "3B293brHd7IH9AVq",
+          "name": "Telegram Hoàng"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.message.document.file_name }}",
+                    "rightValue": "",
+                    "operator": {
+                      "type": "string",
+                      "operation": "exists",
+                      "singleValue": true
+                    },
+                    "id": "f148a8ce-469a-4aed-b2bd-f6f3d4c84a0c"
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "e5b3b59d-8140-4309-8a39-2a1fe49eb62d",
+                    "leftValue": "={{ $json.message.document.file_name }}",
+                    "rightValue": "",
+                    "operator": {
+                      "type": "string",
+                      "operation": "notExists",
+                      "singleValue": true
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.2,
+      "position": [
+        -1024,
+        480
+      ],
+      "id": "30f3571e-8815-4a87-b2cd-4f5a57d3bc02",
+      "name": "Switch"
+    },
+    {
+      "parameters": {
+        "resource": "image",
+        "operation": "analyze",
+        "modelId": {
+          "__rl": true,
+          "value": "models/gemini-2.5-flash",
+          "mode": "list",
+          "cachedResultName": "models/gemini-2.5-flash"
+        },
+        "text": "Bạn là công cụ đọc ảnh để trích xuất dữ liệu.\n  \nHãy phân tích ảnh và xác định loại nội dung của ảnh:\n\nNếu dữ liệu là hợp đồng, trả về dữ liệu ở dạng JSON với các trường sau:\n- \"type\": \"reminder\"\n- “id”: [Số hiệu sự kiện]\n- \"date\": [Ngày cần cảnh báo]\n- \"hour\": [Mặc định là 07:00 AM, GMT+07]\n- \"location\": [Mặc định là Ban Quản lý]\n- \"event\": [Rà soát Hợp đồng]\n- \"participant\": [Mặc định là Kỹ thuật Ban Quản lý]\n\nNếu dữ liệu là lịch, trả về dữ liệu ở dạng JSON với các trường sau:\n- \"type\": \"calendar\"\n- “id”: [Số hiệu sự kiện]\n- \"date\": [Ngày diễn ra sự kiện]\n- \"hour\": [Giờ diễn ra sự kiện]  \n- \"location\": [Nơi diễn ra sự kiện]  \n- \"event\": [Chi tiết của sự kiện]\n- \"participant\": [Các đối tượng tham gia sự kiện]\n\nYêu cầu chung:  \n- Chỉ trả về JSON thuần, không giải thích. Dữ liệu JSON đầu ra phải được khai báo ở dạng $json.output\n- Mỗi đối tượng khác nhau trong mục \"participant\" tách thành một trường riêng với tên trường có cấu trúc “participant 1”, “participant 2”…\n- Mỗi sự kiện tách thành một “id” riêng với đầy đủ các trường liên quan…\n- Nếu thông tin không có trong ảnh, để giá trị rỗng \"\".  \n- Không bỏ sót bất kỳ thông số nào trong lịch.\n- Khi nhận diện thông số trong các trường, đặc biệt là trường \"event\", loại bỏ hết các ký tự đặc biệt như \", \\, /, $\n- Thông tin trong trường “id” có format yy/mm/dd-hh:mm-xx, trong đó \"yy/mm/dd\" là \"date\" diễn ra sự kiện, \"hh:mm\" là \"hour\" diễn ra sự kiện, \"xx\" chỉ đếm số thứ tự sự kiện trong cùng \"date\" và \"hour\" đó, khi thay đổi \"date\" và \"hour\" khác thì reset lại số hiệu\n\nYêu cầu bổ sung với \"type\"=\"reminder\":\n- Phân tích ảnh và tìm ra các thông tin bổ sung, nếu không có thì để giá trị rỗng \"\":\n- [Ngày hợp đồng]\n- [Thời hạn hợp đồng]\n- [Mã Dự án]\n- [Tên Dự án]\n- [Số hợp đồng]\n- [Tên Hợp đồng]\n- [Tên Nhà thầu]\n- \"date\": [Ngày cần cảnh báo] là \"ngày hết hạn của [Hợp đồng] hoặc [Công việc]\". \"Ngày hết hạn của [Hợp đồng]\" là [Ngày hợp đồng] cộng với [Thời hạn hợp đồng].  cộng với  phải được phân tích từ ảnh. \"Ngày hết hạn của [công việc]\" sẽ được bổ sung trong tin nhắn.\n- \"event\": [Rà soát Hợp đồng] là thông báo có dạng \"[Tên Hợp đồng] [Số Hợp đồng] của [Mã Dự án] [Tên Dự án] [Tên Nhà thầu] sẽ hết hạn [Tên Công việc] vào [Ngày cần cảnh báo]\"",
+        "inputType": "binary",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.googleGemini",
+      "typeVersion": 1,
+      "position": [
+        -672,
+        288
+      ],
+      "id": "577bab4e-8ec6-4e8d-bda1-724403a92b26",
+      "name": "Đọc thông tin từ văn bản",
+      "alwaysOutputData": false,
+      "credentials": {
+        "googlePalmApi": {
+          "id": "02UXHft85xgWf6L4",
+          "name": "Google Gemini(PaLM) Api PMU"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Hãy phân tích {{ $json.message.text }} và xác định loại nội dung của {{ $json.message.text }}:\n\nNếu nội dung liên quan đến hợp đồng, trả về dữ liệu ở dạng JSON với các trường sau:\n- \"type\": \"reminder\"\n- “id”: [Số hiệu sự kiện]\n- \"date\": [Ngày cần cảnh báo]\n- \"hour\": [Mặc định là 07:00 AM, GMT+07]\n- \"location\": [Mặc định là Ban Quản lý]\n- \"event\": [Rà soát]\n- \"participant\": [Mặc định là Kỹ thuật Ban Quản lý]\n\nNếu nội dung liên quan đến lịch, trả về dữ liệu ở dạng JSON với các trường sau:\n- \"type\": \"calendar\"\n- “id”: [Số hiệu sự kiện]\n- \"date\": [Ngày diễn ra sự kiện]\n- \"hour\": [Giờ diễn ra sự kiện]  \n- \"location\": [Nơi diễn ra sự kiện]  \n- \"event\": [Chi tiết của sự kiện]\n- \"participant\": [Các đối tượng tham gia sự kiện]\n\nYêu cầu:  \n- Chỉ trả về JSON thuần, không giải thích. Dữ liệu JSON đầu ra phải được khai báo ở dạng $json.output\n- Mỗi đối tượng khác nhau trong mục \"participant\" tách thành một trường riêng với tên trường có cấu trúc “participant x\", x là số thứ tự\n- Mặc định hiểu tôi là \"Cán bộ BQL\", nếu có thêm tên người thì người đó cũng là Cán bộ BQL \n- Mỗi sự kiện tách thành một “id” riêng với đầy đủ các trường liên quan.\n- Nếu thông tin không có, để giá trị rỗng \"\". \n- Khi nhận diện thông số trong các trường, đặc biệt là trường \"event\", loại bỏ hết các ký tự đặc biệt như \", \\, /, $, =\n- Nếu thông tin về năm không rõ thì mặc định là cùng năm với {{ $now }}, các mốc thời gian như \"ngày mai\", \"ngày kia\", hôm nay thì được tính với mốc {{ $now }}. Nếu thông tin về ngày tháng nhỏ hơn {{ $now }} thì sẽ hiểu là năm tiếp theo.\n- Thông tin trong trường “id” có format yy/mm/dd-hh:mm-xx, trong đó \"yy/mm/dd\" là \"date\" diễn ra sự kiện, \"hh:mm\" là \"hour\" diễn ra sự kiện, \"xx\" chỉ đếm số hiệu sự kiện trong cùng \"date\" và \"hour\" đó, khi thay đổi \"date\" và \"hour\" khác thì reset lại số hiệu. Mặc định \"xx\" bắt đầu là 10.\n  \nYêu cầu bổ sung với \"type\"=\"reminder\":\n\n- Phân tích {{ $json.message.text }} và tìm ra các thông tin bổ sung, nếu không có thì để giá trị rỗng \"\":\n  - [Ngày hợp đồng] hoặc [Ngày công việc]\n  - [Thời hạn hợp đồng] hoặc [Thời hạn công việc]\n  - [Tên Dự án]\n  - [Mã Dự án]\n  - [Số Hợp đồng]\n  - [Tên Hợp đồng]\n  - [Tên Công việc]\n  - [Tên Nhà thầu]\n\n- \"date\": [Ngày cần cảnh báo] là \"Ngày hết hạn của [Hợp đồng] hoặc [Công việc]\". \"Ngày hết hạn của [Hợp đồng] hoặc [Công việc]\" là [Ngày hợp đồng] cộng với [Thời hạn hợp đồng] hoặc [Ngày công việc] cộng với [Thời hạn công việc].\n\n- \"event\": [Rà soát Hợp đồng] là thông báo có dạng \"[Tên Hợp đồng] [Số Hợp đồng] của [Mã Dự án] [Tên Dự án] [Tên Nhà thầu] sẽ hết hạn [Tên Công việc] vào [Ngày cần cảnh báo]\"",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        -816,
+        432
+      ],
+      "id": "34325ef2-25d8-4d03-bf7d-410378ac366b",
+      "name": "Phân tích tin nhắn trực tiếp"
+    },
+    {
+      "parameters": {
+        "updates": [
+          "message"
+        ],
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegramTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        -1040,
+        288
+      ],
+      "id": "6b3485fe-ad31-4729-9b00-b1568651fa40",
+      "name": "Tin nhắn có kèm file hoặc không",
+      "webhookId": "11231394-305d-4c4d-af8d-1e30f30d64ba",
+      "credentials": {
+        "telegramApi": {
+          "id": "3B293brHd7IH9AVq",
+          "name": "Telegram Hoàng"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Kiểm tra dữ liệu đầu vào từ Gemini\nconst items = $input.all();\nif (!items || !items.length || !items[0].json) {\n  throw new Error(\"Missing or invalid input data from Gemini\");\n}\n\n// Lấy chuỗi JSON từ Gemini\nlet note;\nif (items[0].json.content && items[0].json.content.parts && items[0].json.content.parts[0].text) {\n  note = items[0].json.content.parts[0].text;\n} else if (items[0].json.output) {\n  note = items[0].json.output;\n} else {\n  throw new Error(\"No valid JSON data found in items[0].json.content.parts[0].text or items[0].json.output\");\n}\n\n// Debug: In chuỗi JSON gốc\nconsole.log(\"Raw JSON string:\", note);\n\n// Làm sạch chuỗi JSON\ntry {\n  // Loại bỏ \"$json.output\": { ... } nếu có\n  note = note.replace(/^\\{\\s*\"\\$json\\.output\"\\s*:\\s*/, \"\").replace(/\\s*\\}$/, \"\").trim();\n  // Loại bỏ ```json và ```\n  note = note.replace(/```json\\n?/, \"\").replace(/```\\n?/, \"\").trim();\n  // Thay thế \\n, \\t\n  note = note.replace(/\\\\n/g, \"\").replace(/\\\\t/g, \"\");\n  // Xử lý dấu \\ trước dấu ngoặc kép trong chuỗi\n  note = note.replace(/\\\\\"/g, '\"');\n  // Xử lý các dấu \\ thừa không hợp lệ\n  note = note.replace(/\\\\([^\"\\\\])/g, \"$1\");\n  // Loại bỏ các dấu \\ thừa ở cuối chuỗi\n  note = note.replace(/\\\\$/g, \"\");\n} catch (error) {\n  throw new Error(`Error cleaning JSON string: ${error.message}. Raw input: ${note}`);\n}\n\n// Debug: In chuỗi JSON đã làm sạch\nconsole.log(\"Cleaned JSON string:\", note);\n\n// Phân tích JSON\nlet events;\ntry {\n  const parsed = JSON.parse(note);\n  // Nếu parsed là đối tượng đơn, chuyển thành mảng\n  events = Array.isArray(parsed) ? parsed : [parsed];\n} catch (error) {\n  throw new Error(`Error parsing JSON at position ${error.position || \"unknown\"}: ${error.message}. Cleaned JSON: ${note}`);\n}\n\n// Debug: In số lượng sự kiện trước khi lọc\nconsole.log(\"Number of events before filtering:\", events.length);\n\n// Lấy thời gian hiện tại (múi giờ +07)\nconst currentDate = new Date().toLocaleString(\"en-US\", { timeZone: \"Asia/Ho_Chi_Minh\" });\n\n// Xử lý và lọc các sự kiện\nlet result = events\n  .map(event => {\n    // Tách các participant thành mảng\n    const participants = [];\n    for (let i = 1; i <= 10; i++) {\n      const participantKey = `participant ${i}`;\n      if (event[participantKey] && event[participantKey].trim() !== \"\") {\n        participants.push(event[participantKey]);\n      }\n    }\n\n    // Lọc chỉ giữ lại các participant chứa \"BQL\", \"Ban Quản lý\", \"BKS\" hoặc \"Ban Kiểm soát\"\n    const filteredParticipants = participants.filter(participant =>\n      participant.toLowerCase().includes(\"bql\") ||\n      participant.toLowerCase().includes(\"ban quản lý\") ||\n      participant.toLowerCase().includes(\"bks\") ||\n      participant.toLowerCase().includes(\"ban kiểm soát\")\n    );\n\n    // Gộp date và hour thành time ở định dạng yyyy-mm-ddThh:mm:ss+07:00\n    let time = \"\";\n    if (event.date) {\n      // Parse date từ định dạng yyyy-mm-dd hoặc dd/mm/yyyy\n      let dateParts = event.date.split(/[-/]/);\n      if (dateParts.length === 3) {\n        let mm, dd, yyyy;\n        if (event.date.includes(\"-\")) { // yyyy-mm-dd\n          yyyy = dateParts[0];\n          mm = dateParts[1].padStart(2, \"0\");\n          dd = dateParts[2].padStart(2, \"0\");\n        } else { // dd/mm/yyyy\n          dd = dateParts[0].padStart(2, \"0\");\n          mm = dateParts[1].padStart(2, \"0\");\n          yyyy = dateParts[2];\n        }\n        time = `${yyyy}-${mm}-${dd}`;\n      }\n    } else {\n      time = \"1970-01-01\"; // Giá trị mặc định nếu không có date\n    }\n    if (event.hour) {\n      // Parse hour từ định dạng hh:mm, hhhmm, hoặc hh:mm AM/PM\n      let hourStr = event.hour.replace(\"h\", \":\").replace(\", GMT+07\", \"\").trim();\n      if (hourStr.includes(\"AM\") || hourStr.includes(\"PM\")) {\n        // Chuyển đổi AM/PM sang 24h\n        const [timePart, period] = hourStr.split(\" \");\n        let [hours, minutes] = timePart.split(\":\").map(Number);\n        if (period === \"PM\" && hours !== 12) hours += 12;\n        if (period === \"AM\" && hours === 12) hours = 0;\n        hourStr = `${hours.toString().padStart(2, \"0\")}:${minutes.toString().padStart(2, \"0\")}`;\n      }\n      if (hourStr.split(\":\").length === 1) {\n        hourStr += \":00\"; // Nếu chỉ có giờ, thêm phút 00\n      }\n      time += `T${hourStr}:00+07:00`; // Thêm giây 00 và múi giờ +07:00\n    } else {\n      time += \"T00:00:00+07:00\"; // Nếu không có hour, thêm giờ mặc định\n    }\n\n    // Xác định type cho output\n    const outputType = event.type === \"reminder\" ? \"nhắc nhở\" : \"lịch\";\n\n    // Tạo đối tượng cơ bản cho sự kiện\n    let eventObj = {\n      id: event.id || \"\",\n      type: outputType,\n      time: time,\n      location: event.location || \"\",\n      event: event.event || \"\",\n      participants: filteredParticipants,\n      date_processed: currentDate\n    };\n\n    // Nếu type = \"reminder\", thêm các field từ additional_info\n    if (event.type === \"reminder\") {\n      const additionalInfo = event.additional_info || {};\n      eventObj = {\n        ...eventObj,\n        contract_date: additionalInfo.contract_date || \"\",\n        contract_duration: additionalInfo.contract_duration || \"\",\n        project_name: additionalInfo.project_name || \"\",\n        project_code: additionalInfo.project_code || \"\",\n        contract_number: additionalInfo.contract_number || \"\",\n        contract_name: additionalInfo.contract_name || \"\",\n        work_name: additionalInfo.work_name || \"\",\n        contractor_name: additionalInfo.contractor_name || \"\"\n      };\n    }\n\n    return eventObj;\n  })\n  .filter(item => {\n    // Lọc các sự kiện có participants chứa \"BQL\", \"Ban Quản lý\", \"BKS\" hoặc \"Ban Kiểm soát\"\n    console.log(\"Event ID:\", item.id, \"Type:\", item.type, \"Filtered Participants:\", item.participants);\n    return item.participants.length > 0;\n  });\n\n// Debug: In số lượng sự kiện sau khi lọc\nconsole.log(\"Number of events after filtering:\", result.length);\n\n// Gộp participants thành chuỗi sau khi lọc\nresult = result.map(item => ({\n  ...item,\n  participants: item.participants.join(\", \")\n}));\n\n// Trả về kết quả theo định dạng n8n\nreturn result.map(item => ({ json: item }));"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -512,
+        352
+      ],
+      "id": "4963f98e-02cd-41a2-b6d2-6fbec8ad4626",
+      "name": "Lịch",
+      "alwaysOutputData": true
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1",
+    "timezone": "Asia/Ho_Chi_Minh",
+    "callerPolicy": "workflowsFromSameOwner"
+  },
+  "shared": [
+    {
+      "createdAt": "2025-08-26T10:53:30.850Z",
+      "updatedAt": "2025-08-26T10:53:30.850Z",
+      "role": "workflow:owner",
+      "workflowId": "Nd8Im88t1PCcu6rc",
+      "projectId": "1qt5AgXQ1QuSOdsi"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-08-29T09:22:24.000Z",
+  "versionId": "8ab54c25-45f3-4d14-b7c2-a3849b562803"
+}
