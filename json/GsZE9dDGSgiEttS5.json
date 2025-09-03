@@ -1,0 +1,493 @@
+{
+  "active": false,
+  "connections": {
+    "Drive: Download File": {
+      "main": [
+        [
+          {
+            "node": "Analyze image",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Sheets: Append": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Analyze image": {
+      "main": [
+        [
+          {
+            "node": "Code1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code1": {
+      "main": [
+        [
+          {
+            "node": "Google Sheets: Append",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Drive Trigger": {
+      "main": [
+        [
+          {
+            "node": "Drive: Download File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create an event in Google Calendar": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "xAI Grok Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Send a text message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-08-25T03:48:51.252Z",
+  "id": "GsZE9dDGSgiEttS5",
+  "isArchived": true,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Lịch tuần cũ",
+  "nodes": [
+    {
+      "parameters": {
+        "operation": "download",
+        "fileId": {
+          "__rl": true,
+          "value": "={{ $json.id }}",
+          "mode": "id"
+        },
+        "options": {}
+      },
+      "id": "cb640216-8f41-4108-a251-ee49b3861344",
+      "name": "Drive: Download File",
+      "type": "n8n-nodes-base.googleDrive",
+      "position": [
+        -544,
+        192
+      ],
+      "typeVersion": 3,
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "lm5goBGAPBtFOWsW",
+          "name": "Google Drive PMU"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1QwmB-AhLuTlJDwzx4vavklrVKhqehePsP34kKpZ7xxE",
+          "mode": "list",
+          "cachedResultName": "Lịch tuần",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1QwmB-AhLuTlJDwzx4vavklrVKhqehePsP34kKpZ7xxE/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/16Fx5DqALw4jvDh0-X0iV4KgTjnS3w9UI4Iy8rplZ_u8/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Ngày": "={{ $json.date }}",
+            "Giờ": "={{ $json.hour }}",
+            "Địa điểm": "={{ $json.location }}",
+            "Nội dung": "={{ $json.event }}",
+            "ID": "={{ $json.id }}",
+            "Thành phần": "={{ $json.participants }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "ID",
+              "displayName": "ID",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Ngày",
+              "displayName": "Ngày",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Giờ",
+              "displayName": "Giờ",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Địa điểm",
+              "displayName": "Địa điểm",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Nội dung",
+              "displayName": "Nội dung",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Thành phần",
+              "displayName": "Thành phần",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "id": "f92f9219-58c4-465b-966c-ea8ad004fb61",
+      "name": "Google Sheets: Append",
+      "type": "n8n-nodes-base.googleSheets",
+      "position": [
+        -224,
+        192
+      ],
+      "typeVersion": 4,
+      "executeOnce": false,
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "bDxwsbgFGCEJL8T6",
+          "name": "Google Sheets PMU"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "image",
+        "operation": "analyze",
+        "modelId": {
+          "__rl": true,
+          "value": "models/gemini-2.0-flash-thinking-exp",
+          "mode": "list",
+          "cachedResultName": "models/gemini-2.0-flash-thinking-exp"
+        },
+        "text": "Bạn là công cụ đọc ảnh để trích xuất dữ liệu từ lịch tuần.  \nHãy phân tích ảnh và trả về dữ liệu ở dạng JSON với các trường sau:\n- “id”: [Số hiệu sự kiện]  \n- \"date\": [Ngày diễn ra sự kiện] \n- \"hour\": [Giờ chi tiết diễn ra sự kiện]\n- \"location\": [Nơi diễn ra sự kiện]  \n- \"event\": [Chi tiết của sự kiện]\n- \"participant\": [Các đối tượng tham gia sự kiện]\n\nYêu cầu:  \n- Chỉ trả về JSON thuần, không giải thích. Dữ liệu JSON đầu ra phải được khai báo ở dạng $json.output\n- Mỗi đối tượng khác nhau trong mục thành phần tách thành một trường riêng với tên trường có cấu trúc “participant 1”, “participant 2”…\n- Mỗi sự kiện tách thành một “id” riêng với đầy đủ các trường liên quan…\n- Nếu thông tin không có trong ảnh, để giá trị rỗng \"\".  \n- Không bỏ sót bất kỳ thông số nào trong lịch.\n- Khi nhận diện thông số trong các trường, đặc biệt là trường \"event\", loại bỏ hết các ký tự đặc biệt như \", \\, /, $",
+        "inputType": "binary",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.googleGemini",
+      "typeVersion": 1,
+      "position": [
+        -544,
+        352
+      ],
+      "id": "0dbad98d-40dc-4e30-8938-9d8239e4de72",
+      "name": "Analyze image",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "02UXHft85xgWf6L4",
+          "name": "Google Gemini(PaLM) Api PMU"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Kiểm tra dữ liệu đầu vào từ Gemini\nconst items = $input.all();\nif (!items || !items.length || !items[0].json) {\n  throw new Error(\"Missing or invalid input data from Gemini\");\n}\n\n// Lấy chuỗi JSON từ Gemini\nlet note;\nif (items[0].json.content && items[0].json.content.parts && items[0].json.content.parts[0].text) {\n  note = items[0].json.content.parts[0].text;\n} else if (items[0].json.output) {\n  note = items[0].json.output;\n} else {\n  throw new Error(\"No valid JSON data found in items[0].json.content.parts[0].text or items[0].json.output\");\n}\n\n// Debug: In chuỗi JSON gốc\nconsole.log(\"Raw JSON string:\", note);\n\n// Làm sạch chuỗi JSON\ntry {\n  // Loại bỏ \"$json.output\" nếu có\n  note = note.replace(/^\\$json\\.output\\n?/, \"\").trim();\n  // Loại bỏ ```json và ```\n  note = note.replace(/```json\\n?/, \"\").replace(/```\\n?/, \"\").trim();\n  // Thay thế \\n, \\t\n  note = note.replace(/\\\\n/g, \"\").replace(/\\\\t/g, \"\");\n  // Xử lý dấu \\ trước dấu ngoặc kép trong chuỗi\n  note = note.replace(/\\\\\"/g, '\"');\n  // Xử lý các dấu \\ thừa không hợp lệ\n  note = note.replace(/\\\\([^\"\\\\])/g, \"$1\");\n  // Loại bỏ các dấu \\ thừa ở cuối chuỗi\n  note = note.replace(/\\\\$/g, \"\");\n} catch (error) {\n  throw new Error(`Error cleaning JSON string: ${error.message}. Raw input: ${note}`);\n}\n\n// Debug: In chuỗi JSON đã làm sạch\nconsole.log(\"Cleaned JSON string:\", note);\n\n// Phân tích JSON\nlet events;\ntry {\n  events = JSON.parse(note);\n  if (!Array.isArray(events)) {\n    throw new Error(\"Parsed JSON from Gemini is not an array of events\");\n  }\n} catch (error) {\n  throw new Error(`Error parsing JSON at position ${error.position || \"unknown\"}: ${error.message}. Cleaned JSON: ${note}`);\n}\n\n// Lấy thời gian hiện tại (múi giờ +07)\nconst currentDate = new Date().toLocaleString(\"en-US\", { timeZone: \"Asia/Ho_Chi_Minh\" });\n\n// Xử lý và lọc các sự kiện\nconst result = events\n  .map(event => {\n    // Tách các participant thành mảng\n    const participants = [];\n    for (let i = 1; i <= 10; i++) { // Tăng lên 10 để xử lý số lượng participant lớn\n      const participantKey = `participant ${i}`;\n      if (event[participantKey]) {\n        participants.push(event[participantKey]);\n      }\n    }\n\n    // Tạo đối tượng cho sự kiện\n    return {\n      id: parseInt(event.id) || 0,\n      date: event.date || \"\",\n      hour: event.hour || \"\",\n      location: event.location || \"\",\n      event: event.event || \"\",\n      participants: participants,\n      date_processed: currentDate\n    };\n  })\n  .filter(item => {\n    // Lọc các sự kiện có participants chứa \"BQL\" hoặc \"Ban Quản lý\"\n    return item.participants.some(participant =>\n      participant.toLowerCase().includes(\"bql\") ||\n      participant.toLowerCase().includes(\"ban quản lý\")\n    );\n  });\n\n// Trả về kết quả theo định dạng n8n\nreturn result.map(item => ({ json: item }));"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -384,
+        352
+      ],
+      "id": "9e595730-1dd1-48fd-823a-7ac6274665b7",
+      "name": "Code1"
+    },
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyWeek",
+              "hour": 7
+            }
+          ]
+        },
+        "triggerOn": "specificFolder",
+        "folderToWatch": {
+          "__rl": true,
+          "value": "1xnQMU4LQIXmocu_-SVcTJBhhwseqZ_4Q",
+          "mode": "list",
+          "cachedResultName": "Lịch tuần",
+          "cachedResultUrl": "https://drive.google.com/drive/folders/1xnQMU4LQIXmocu_-SVcTJBhhwseqZ_4Q"
+        },
+        "event": "fileCreated",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDriveTrigger",
+      "typeVersion": 1,
+      "position": [
+        -736,
+        352
+      ],
+      "id": "a43cceff-975b-48aa-afc7-bf15eddb2336",
+      "name": "Google Drive Trigger",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "lm5goBGAPBtFOWsW",
+          "name": "Google Drive PMU"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## LẤY THÔNG TIN TỪ FILE\n",
+        "height": 448,
+        "width": 192
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -784,
+        64
+      ],
+      "id": "21f22914-307d-4e37-8001-8839c119e90e",
+      "name": "Sticky Note4"
+    },
+    {
+      "parameters": {
+        "content": "## PHÂN TÍCH THÔNG TIN\n**Lọc các thông tin theo trường có liên quan**\n",
+        "height": 448,
+        "width": 320,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -576,
+        64
+      ],
+      "id": "d107ecbe-f11d-40ae-a6a0-516293a97702",
+      "name": "Sticky Note5"
+    },
+    {
+      "parameters": {
+        "content": "## GHI VÀO SHEET VÀ LÊN LỊCH",
+        "height": 448,
+        "width": 400,
+        "color": 6
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -240,
+        64
+      ],
+      "id": "12e43552-745d-4d2b-929b-f7d435989e98",
+      "name": "Sticky Note6"
+    },
+    {
+      "parameters": {
+        "model": "grok-3-fast",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatXAiGrok",
+      "typeVersion": 1,
+      "position": [
+        -208,
+        400
+      ],
+      "id": "c96c6a0f-22b2-4ec7-9863-5a53da730a5c",
+      "name": "xAI Grok Chat Model",
+      "credentials": {
+        "xAiApi": {
+          "id": "nuArFrJIV927cng1",
+          "name": "xAi PMU"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "calendar": {
+          "__rl": true,
+          "value": "hpwspmu@gmail.com",
+          "mode": "list",
+          "cachedResultName": "hpwspmu@gmail.com"
+        },
+        "start": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Start', ``, 'string') }}",
+        "end": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('End', ``, 'string') }}",
+        "useDefaultReminders": "={{ false }}",
+        "additionalFields": {
+          "summary": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Summary', ``, 'string') }}"
+        },
+        "remindersUi": {
+          "remindersValues": [
+            {
+              "method": "popup",
+              "minutes": 30
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.googleCalendarTool",
+      "typeVersion": 1.3,
+      "position": [
+        64,
+        400
+      ],
+      "id": "b9c638ae-48c8-41c4-9ab8-1154f6b7975c",
+      "name": "Create an event in Google Calendar",
+      "credentials": {
+        "googleCalendarOAuth2Api": {
+          "id": "Vdl3bkwXGwc8WK5q",
+          "name": "Google Calendar PMU"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Bạn được cung cấp dữ liệu từ google sheet. Kiểm tra các dòng từ file trước đó, với mỗi dòng trong sheet có {{ $json.ID }} khác nhau thì kích hoạt tạo event. \n\nEvent được tạo ra phải có các thông tin:\n- Start: là {{ $json[\"Giờ\"] }} và {{ $json[\"Ngày\"] }} ghép với nhau, múi giờ mặc định là GMT+07:00\n- End: mặc định là 1 tiếng sau Start date\n- Summary: là {{ $json[\"Địa điểm\"] }} và {{ $json[\"Nội dung\"] }} ghép với nhau\nLưu ý: \n- Với mỗi sự kiện khác nhau thì tạo một event riêng rẽ. Định dạng giờ phải tương thích với Google Calendar\n- Không hỏi lại.\n- Với những mốc thời gian trước mốc thời gian hiện tại thì không tạo event nữa.\n- Nếu ngày, giờ, địa điểm, trùng khớp thì không tạo event nữa.",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        -96,
+        192
+      ],
+      "id": "9af0c7be-b8f7-49c9-bbc7-0244cfb99779",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "chatId": "7039157861",
+        "text": "=Tôi đã cập nhật lịch mới vào Calendar của bạn . Hãy kiểm tra để biết chi tiết!",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        208,
+        192
+      ],
+      "id": "a3f1d873-8d62-4af5-870d-6c26f8bfc4d8",
+      "name": "Send a text message",
+      "webhookId": "1fa78ed5-6438-4c4e-b925-bc27de1074e2",
+      "credentials": {
+        "telegramApi": {
+          "id": "3B293brHd7IH9AVq",
+          "name": "Telegram Hoàng"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## THÔNG BÁO KẾT QUẢ\n",
+        "height": 448,
+        "width": 192
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        176,
+        64
+      ],
+      "id": "b303cf5d-d02b-4d17-a1ec-fee85f3e972c",
+      "name": "Sticky Note"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1",
+    "timezone": "Asia/Bangkok",
+    "callerPolicy": "workflowsFromSameOwner"
+  },
+  "shared": [
+    {
+      "createdAt": "2025-08-25T03:48:51.256Z",
+      "updatedAt": "2025-08-25T03:48:51.256Z",
+      "role": "workflow:owner",
+      "workflowId": "GsZE9dDGSgiEttS5",
+      "projectId": "1qt5AgXQ1QuSOdsi"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-08-27T01:09:47.000Z",
+  "versionId": "b67e7376-b22b-4d15-ba1a-91acacc02b8b"
+}
